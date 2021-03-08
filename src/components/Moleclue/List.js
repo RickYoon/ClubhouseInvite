@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-// import "./main.css";
+import "./main.css";
 import { Link } from "react-router-dom";
 import logo from "./logo192.png";
 
@@ -30,16 +30,34 @@ const List = () => {
 
   return (
     <>
-      <div className="container mt-2">
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title" style={{ fontSize: "15px" }}>
-              글리버리와 함께하는 클럽하우스aaaa
-            </h5>
-            <p className="card-subtext" style={{ fontSize: "12px" }}>
-              과연 우리는 좋은 사람들이 될 수 있을까? 그렇지 않을까나~?
+      <div className="my-2 w-full md:w-5/6 mx-auto bg-white p-2 shadow rounded-md hover:bg-gray-200">
+        <div className="m-3">
+          <div className="text-left">
+            <p className="m-0" style={{ fontSize: "12px" }}>
+              #기술 #개발 #노코드
             </p>
-            <img src="./logo192.png" alt="..." className="rounded-circle"></img>
+            <p className="ff" style={{ fontSize: "12px" }}>
+              March 7, 2021 2:30 PM KST
+            </p>
+
+            <h4 className="text-3xl ff font-bold">
+              데이터지능 첫 생방송: 코딩없이 AI를 공부할 수 있다고?
+            </h4>
+            <div
+              className="m-0"
+              style={{
+                display: "flex",
+                verticalAlign: "middle",
+                fontSize: "12px",
+              }}
+            >
+              <img
+                src="https://clublink.to/storage/avatar/bcbc57df.jpeg"
+                alt="avatar"
+                className="avatar"
+              ></img>
+              <div>Devrick</div>
+            </div>
           </div>
         </div>
       </div>
