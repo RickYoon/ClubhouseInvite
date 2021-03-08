@@ -5,10 +5,19 @@ import List from "../Moleclue/List";
 
 const Home = () => {
   return (
-    <div className="card">
-      <TopNavBar />
+    <div className="Container">
       <Filter />
-      <List />
+      <div className="container mt-3">
+        <List />
+        <List />
+        <List />
+        <List />
+        <List />
+        <List />
+        <List />
+        <List />
+        <List />
+      </div>
     </div>
   );
 };

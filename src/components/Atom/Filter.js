@@ -1,26 +1,29 @@
 import React from "react";
+import "./box.css";
 
 const Filter = () => {
   return (
-    <div className="container">
-      <div className="container mx-auto desktop mb-2 md:mb-10">
-        <div className="w-full md:w-5/6 mx-auto bg-white p-6 rounded-md shadow-lg">
-          <p className="text-left text-xl ff font-semibold mb-1">
-            Find an amazing event on Hostnotes
-          </p>
-
-          <div class="w-full">
-            <form method="GET">
-              <input
-                type="search"
-                name="q"
-                class="bg-purple-white bg-gray-200 shadow rounded border-0 p-3 w-full"
-                placeholder="Search for an event on Hostnotes..."
-                value=""
-              />
-            </form>
+    <div className="container mt-3 pt-5">
+      좋은 클럽하우스 초대장을 나눠보려합니다.
+      <div className="box">
+        <form className="row row-cols-lg-auto g-10 align-items-center">
+          <label className="visually-hidden" for="inlineFormInputGroupUsername">
+            Username
+          </label>
+          <div className="input-group">
+            <input
+              type="text"
+              className="form-control form-control-ml"
+              placeholder="검색하기"
+            />
           </div>
-        </div>
+
+          {/* <div className="col-12">
+            <button type="submit" className="btn btn-success">
+              검색하기
+            </button>
+          </div> */}
+        </form>{" "}
       </div>
     </div>
   );

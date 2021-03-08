@@ -30,12 +30,14 @@ const List = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container mt-2">
         <div className="card">
           <div className="card-body">
-            <h5 className="card-title">글리버리와 함께하는 클럽하우스</h5>
-            <p className="card-text">
-              오늘의 주제: 과연 우리는 좋은 사람들이 될 수 있을까?
+            <h5 className="card-title" style={{ fontSize: "15px" }}>
+              글리버리와 함께하는 클럽하우스aaaa
+            </h5>
+            <p className="card-subtext" style={{ fontSize: "12px" }}>
+              과연 우리는 좋은 사람들이 될 수 있을까? 그렇지 않을까나~?
             </p>
             <img src="./logo192.png" alt="..." className="rounded-circle"></img>
           </div>
