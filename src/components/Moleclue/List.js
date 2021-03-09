@@ -28,9 +28,17 @@ const List = () => {
     // loadInfos();
   }, []);
 
+  const goanother = () => {
+    window.location.href = "https://www.joinclubhouse.com/event/MznYp6qp";
+    console.log("you clicked!!");
+  };
+
   return (
     <>
-      <div className="my-2 w-full md:w-5/6 mx-auto bg-white p-2 shadow rounded-md hover:bg-gray-200">
+      <div
+        className="my-2 w-full md:w-5/6 mx-auto bg-white p-2 shadow rounded-md hover:bg-gray-200"
+        onClick={goanother}
+      >
         <div className="m-3">
           <div className="text-left">
             <p className="m-0" style={{ fontSize: "12px" }}>
