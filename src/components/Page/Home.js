@@ -13,7 +13,7 @@ const Home = () => {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:3003/users");
+    const result = await axios.get("http://localhost:3003/events");
     setUser(result.data);
   };
 
@@ -21,10 +21,8 @@ const Home = () => {
     <div className="container mx-auto desktop mb-2 md:mb-10">
       <Filter />
       <div className="container mt-3 m-0 p-0">
-        <List />
-        <List />
         {users.map((user) => (
-          <div>{user.company.catchPhrase}</div>
+          <List props={user} />
         ))}
       </div>
     </div>
