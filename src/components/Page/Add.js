@@ -5,6 +5,8 @@ import List from "../Moleclue/List";
 import axios from "axios";
 
 const Add = () => {
+  const [showcard, setShowcard] = useState(false);
+
   const [infos, setInfos] = useState({
     title: "",
     weekday: "",
@@ -43,6 +45,10 @@ const Add = () => {
     console.log("click button");
   };
 
+  const postEvents = () => {
+    console.log("you clicked post!");
+  };
+
   const loadUsers = async () => {
     // const url = "https://www.joinclubhouse.com/event/xkL60q1y";
     try {
@@ -56,21 +62,26 @@ const Add = () => {
       }).then((res) => {
         // console.log(res.data);
         // console.log(res.data.title);
-
-        setInfos({
-          ...infos,
-          title: res.data.title,
-          weekday: res.data.weekday,
-          images: res.data.images,
-          description: res.data.description,
-          datetime: res.data.datetime,
-          club: res.data.club,
-          moderators: res.data.moderators,
-        });
-        console.log(infos);
+        console.log(res);
+        if (res.data.title.length == 0) {
+          alert("올바른 주소가 아닙니다.");
+        } else {
+          setShowcard(true);
+          setInfos({
+            ...infos,
+            title: res.data.title,
+            weekday: res.data.weekday,
+            images: res.data.images,
+            description: res.data.description,
+            datetime: res.data.datetime,
+            club: res.data.club,
+            moderators: res.data.moderators,
+          });
+          console.log(infos);
+        }
       });
     } catch {
-      alert("주소를 정확하게 입력해주세요!");
+      alert("url을 정확하게 입력해주세요!");
     }
   };
 
@@ -105,6 +116,42 @@ const Add = () => {
             </button>
           </form>
         </div>
+        {showcard == true ? (
+          <div className="container mt-4">
+            <div className="card">
+              <div className="card-body">
+                <p className="card-subtext" style={{ fontSize: "12px" }}>
+                  {infos.datetime}
+                </p>
+                <h5 className="card-title" style={{ fontSize: "15px" }}>
+                  {infos.title}
+                </h5>
+                <p className="card-subtext" style={{ fontSize: "12px" }}>
+                  {infos.moderators}
+                </p>
+                {infos.images.map((kk) => (
+                  <img
+                    src={kk}
+                    alt="Avatar"
+                    width="50px"
+                    style={{ borderRadius: "50%", marginLeft: "5px" }}
+                  ></img>
+                ))}
+                }
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg btn-block mt-5"
+                  style={{ width: "100%", marginBottom: "10px" }}
+                  onClick={postEvents}
+                >
+                  게시하기!
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );
