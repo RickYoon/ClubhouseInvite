@@ -45,8 +45,19 @@ const Add = () => {
     console.log("click button");
   };
 
-  const postEvents = () => {
+  const postEvents = async () => {
     console.log("you clicked post!");
+    const result = await axios({
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/insertEvents`,
+      data: { eventdata: infos },
+      // url: `https://z5v2zc0s9i.execute-api.ap-northeast-2.amazonaws.com/production/getLifeInfo`,
+    }).then((res) => {
+      console.log(res);
+    });
   };
 
   const loadUsers = async () => {
@@ -137,10 +148,13 @@ const Add = () => {
                     style={{ borderRadius: "50%", marginLeft: "5px" }}
                   ></img>
                 ))}
+                <p className="card-subtext mt-3" style={{ fontSize: "12px" }}>
+                  {infos.description}
+                </p>
                 }
                 <button
                   type="button"
-                  class="btn btn-primary btn-lg btn-block mt-5"
+                  class="btn btn-primary btn-lg btn-block mt-2"
                   style={{ width: "100%", marginBottom: "10px" }}
                   onClick={postEvents}
                 >
