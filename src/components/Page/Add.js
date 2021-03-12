@@ -18,7 +18,9 @@ const Add = () => {
     images: [],
     description: "",
     datetime: "",
+    datetimeDB: "",
     club: "",
+    url: "",
   });
 
   const {
@@ -102,9 +104,11 @@ const Add = () => {
             datetime: moment(date)
               .subtract(9, "hours")
               .format("YYYY-MM-DD dddd a hh시mm분"),
+            datetimeDB: date,
             club: res.data.club,
             moderators: res.data.moderators,
             moderatorsArray: res.data.moderatorsArray,
+            url: res.data.url,
           });
         }
       });
