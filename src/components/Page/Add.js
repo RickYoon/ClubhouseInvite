@@ -61,9 +61,14 @@ const Add = () => {
       },
       url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/insertEvents`,
       data: { eventdata: infos },
-      // url: `https://z5v2zc0s9i.execute-api.ap-northeast-2.amazonaws.com/production/getLifeInfo`,
     }).then((res) => {
-      console.log(res);
+      console.log(res.data);
+      if (res.data.dbinsertResult == "success") {
+        alert("성공");
+        window.location.href = "/";
+      } else {
+        alert("실패");
+      }
     });
   };
 
