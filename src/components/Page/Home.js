@@ -5,28 +5,47 @@ import List from "../Moleclue/List";
 import axios from "axios";
 
 const Home = () => {
-  const [users, setUser] = useState({});
+  const [events, setEvents] = useState([]);
+  const [infos, setInfos] = useState({
+    title: "",
+    weekday: "",
+    moderators: "",
+    moderatorsArray: "",
+    images: [],
+    description: "",
+    datetime: "",
+    datetimeDB: "",
+    club: "",
+    url: "",
+  });
+
+  const {
+    title,
+    weekday,
+    moderators,
+    moderatorsArray,
+    images,
+    description,
+    datetime,
+    club,
+  } = infos; // 비구조화 할당을 통해 값 추출
 
   useEffect(() => {
     loadUsers();
-    console.log(users);
   }, []);
 
   const loadUsers = async () => {
-    const url = "https://www.joinclubhouse.com/event/xkL60q1y";
     const result = await axios({
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/coopangCrawler?url=${url}`,
+      url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/queryEvents`,
       // url: `https://z5v2zc0s9i.execute-api.ap-northeast-2.amazonaws.com/production/getLifeInfo`,
     }).then((res) => {
-      console.log(res.body);
-      setUser(res.body);
-      let temp = JSON.stringify(users);
-      console.log(temp);
-      // console.log(res.data);
+      console.log(res.data.Items);
+      setEvents(res.data.Items);
+      console.log(events);
     });
   };
 
@@ -37,6 +56,38 @@ const Home = () => {
         {/* {users.map((user) => (
           <List props={user} />
         ))} */}
+        {events.map((event) => (
+          <div className="container mt-4">
+            <div className="card">
+              <div className="card-body">
+                <p className="card-subtext" style={{ fontSize: "12px" }}>
+                  {event.datetimeKorea}
+                </p>
+                <h5 className="card-title" style={{ fontSize: "15px" }}>
+                  {event.title}
+                </h5>
+                {event.images.map((kk, index) => (
+                  <div className="avatarbox">
+                    <div className="innerbox">
+                      <img
+                        src={kk}
+                        alt="Avatar"
+                        width="40px"
+                        style={{ borderRadius: "50%", marginLeft: "5px" }}
+                      ></img>
+                      <div style={{ fontSize: "10px" }}>
+                        {event.moderators[index]}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                <p className="card-subtext mt-3" style={{ fontSize: "12px" }}>
+                  {event.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
