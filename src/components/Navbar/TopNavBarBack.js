@@ -6,7 +6,7 @@ const TopNavBarBack = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          이벤트 추가하기
+          이벤트 추가
         </Link>
         <Link className="navbar-brand" to="/">
           <svg

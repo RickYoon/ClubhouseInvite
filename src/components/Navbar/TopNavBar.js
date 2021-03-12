@@ -6,7 +6,7 @@ const TopNavBar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          클하초대장
+          goClubHouse
         </Link>
         <Link className="navbar-brand" to="/add">
           <svg

@@ -1,0 +1,11 @@
+.avatarbox {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.innerbox {
+  margin-left: 20px;
+}

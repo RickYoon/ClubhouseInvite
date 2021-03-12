@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import moment from "moment";
 import TopNavBar from "../Navbar/TopNavBar";
 import Filter from "../Atom/Filter";
 import List from "../Moleclue/List";
 import axios from "axios";
+import "./add.css";
+import "moment/locale/ko";
 
 const Add = () => {
   const [showcard, setShowcard] = useState(false);
@@ -11,6 +14,7 @@ const Add = () => {
     title: "",
     weekday: "",
     moderators: "",
+    moderatorsArray: "",
     images: [],
     description: "",
     datetime: "",
@@ -21,6 +25,7 @@ const Add = () => {
     title,
     weekday,
     moderators,
+    moderatorsArray,
     images,
     description,
     datetime,
@@ -69,7 +74,6 @@ const Add = () => {
           "Content-Type": "application/json",
         },
         url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/coopangCrawler?url=${text}`,
-        // url: `https://z5v2zc0s9i.execute-api.ap-northeast-2.amazonaws.com/production/getLifeInfo`,
       }).then((res) => {
         // console.log(res.data);
         // console.log(res.data.title);
@@ -78,17 +82,30 @@ const Add = () => {
           alert("올바른 주소가 아닙니다.");
         } else {
           setShowcard(true);
+          let date = new Date(res.data.datetime);
+          // moment().subtract(7, 'days');
+          console.log(moment(date).subtract(9, "hours").day());
+          console.log(
+            moment(date).subtract(9, "hours").format("YYYY-MM-DD HH:mm:ss dddd")
+          );
+          // console.log(date.format("YYYY MM"));
+          // console.log(new Date(res.data.datetime));
+          // console.log(res.data.)
+          console.log(infos);
+
           setInfos({
             ...infos,
             title: res.data.title,
             weekday: res.data.weekday,
             images: res.data.images,
             description: res.data.description,
-            datetime: res.data.datetime,
+            datetime: moment(date)
+              .subtract(9, "hours")
+              .format("YYYY-MM-DD dddd a hh시mm분"),
             club: res.data.club,
             moderators: res.data.moderators,
+            moderatorsArray: res.data.moderatorsArray,
           });
-          console.log(infos);
         }
       });
     } catch {
@@ -106,12 +123,12 @@ const Add = () => {
           style={{ fontSize: "22px" }}
         >
           함께하고 싶은 이벤트를 <br />
-          추가하고 더 많은 사람들과 함께해요
+          게시하고 더 많은 사람들과 함께해요
         </h1>
         <div className="w-full border p-3 bg-white rounded-md">
           <form onSubmit={test}>
             <p className="text-center" style={{ fontSize: "15px" }}>
-              초대링크를 붙여넣고, 검토하기!
+              초대링크를 붙여넣고, 초대장 만들기
             </p>
             <input
               className="bg-purple-white bg-gray-200 shadow rounded border-0 p-3 w-100 mt-0"
@@ -123,7 +140,7 @@ const Add = () => {
               className="bg-gray-500 rounded border-0 w-100 p-3 mt-3"
               onClick={onReset}
             >
-              Validate
+              추가
             </button>
           </form>
         </div>
@@ -137,21 +154,25 @@ const Add = () => {
                 <h5 className="card-title" style={{ fontSize: "15px" }}>
                   {infos.title}
                 </h5>
-                <p className="card-subtext" style={{ fontSize: "12px" }}>
-                  {infos.moderators}
-                </p>
-                {infos.images.map((kk) => (
-                  <img
-                    src={kk}
-                    alt="Avatar"
-                    width="50px"
-                    style={{ borderRadius: "50%", marginLeft: "5px" }}
-                  ></img>
+                {infos.images.map((kk, index) => (
+                  <div className="avatarbox">
+                    <div className="innerbox">
+                      <img
+                        src={kk}
+                        alt="Avatar"
+                        width="40px"
+                        style={{ borderRadius: "50%", marginLeft: "5px" }}
+                      ></img>
+                      <div style={{ fontSize: "10px" }}>
+                        {infos.moderatorsArray[index]}
+                      </div>
+                    </div>
+                  </div>
                 ))}
                 <p className="card-subtext mt-3" style={{ fontSize: "12px" }}>
                   {infos.description}
                 </p>
-                }
+
                 <button
                   type="button"
                   class="btn btn-primary btn-lg btn-block mt-2"
