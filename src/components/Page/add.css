@@ -9,3 +9,7 @@
 .innerbox {
   margin-left: 20px;
 }
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
