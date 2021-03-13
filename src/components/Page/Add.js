@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import moment from "moment";
-import TopNavBar from "../Navbar/TopNavBar";
-import Filter from "../Atom/Filter";
-import List from "../Moleclue/List";
 import axios from "axios";
 import "./add.css";
 import "moment/locale/ko";
@@ -23,16 +20,16 @@ const Add = () => {
     url: "",
   });
 
-  const {
-    title,
-    weekday,
-    moderators,
-    moderatorsArray,
-    images,
-    description,
-    datetime,
-    club,
-  } = infos; // 비구조화 할당을 통해 값 추출
+  // const {
+  //   title,
+  //   weekday,
+  //   moderators,
+  //   moderatorsArray,
+  //   images,
+  //   description,
+  //   datetime,
+  //   club,
+  // } = infos; // 비구조화 할당을 통해 값 추출
 
   const [text, setText] = useState("");
   function test(event) {
@@ -54,7 +51,7 @@ const Add = () => {
 
   const postEvents = async () => {
     console.log("you clicked post!");
-    const result = await axios({
+    await axios({
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +60,7 @@ const Add = () => {
       data: { eventdata: infos },
     }).then((res) => {
       console.log(res.data);
-      if (res.data.dbinsertResult == "success") {
+      if (res.data.dbinsertResult === "success") {
         alert("성공");
         window.location.href = "/";
       } else {
@@ -75,7 +72,7 @@ const Add = () => {
   const loadUsers = async () => {
     // const url = "https://www.joinclubhouse.com/event/xkL60q1y";
     try {
-      const result = await axios({
+      await axios({
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +82,7 @@ const Add = () => {
         // console.log(res.data);
         // console.log(res.data.title);
         console.log(res);
-        if (res.data.title.length == 0) {
+        if (res.data.title.length === 0) {
           alert("올바른 주소가 아닙니다.");
         } else {
           setShowcard(true);
@@ -153,7 +150,7 @@ const Add = () => {
             </button>
           </form>
         </div>
-        {showcard == true ? (
+        {showcard === true ? (
           <div className="container mt-4">
             <div className="card">
               <div className="card-body">

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import TopNavBar from "../Navbar/TopNavBar";
 import Filter from "../Atom/Filter";
-import List from "../Moleclue/List";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./add.css";
 
@@ -157,41 +156,46 @@ const Home = () => {
       )}
 
       {events.map((event) => (
-        <div
-          className="w-full mt-3 rounded-md"
-          onClick={() => {
-            console.log(event.eventCode);
-          }}
+        <Link
+          to={`/event/${event.eventCode}`}
+          style={{ textDecoration: "none", color: "black" }}
         >
-          <div className="card">
-            <div className="card-body">
-              <p className="card-subtext" style={{ fontSize: "12px" }}>
-                {event.datetimeKorea}
-              </p>
-              <h5 className="card-title" style={{ fontSize: "15px" }}>
-                {event.title}
-              </h5>
-              {event.images.map((kk, index) => (
-                <div className="avatarbox">
-                  <div className="innerbox">
-                    <img
-                      src={kk}
-                      alt="Avatar"
-                      width="40px"
-                      style={{ borderRadius: "50%", marginLeft: "5px" }}
-                    ></img>
-                    <div style={{ fontSize: "10px" }}>
-                      {event.moderators[index]}
+          <div
+            className="w-full mt-3 rounded-md"
+            onClick={() => {
+              console.log(event.eventCode);
+            }}
+          >
+            <div className="card">
+              <div className="card-body">
+                <p className="card-subtext" style={{ fontSize: "12px" }}>
+                  {event.datetimeKorea}
+                </p>
+                <h5 className="card-title" style={{ fontSize: "15px" }}>
+                  {event.title}
+                </h5>
+                {event.images.map((kk, index) => (
+                  <div className="avatarbox">
+                    <div className="innerbox">
+                      <img
+                        src={kk}
+                        alt="Avatar"
+                        width="40px"
+                        style={{ borderRadius: "50%", marginLeft: "5px" }}
+                      ></img>
+                      <div style={{ fontSize: "10px" }}>
+                        {event.moderators[index]}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-              <p className="card-subtext mt-3" style={{ fontSize: "12px" }}>
-                {event.description}
-              </p>
+                ))}
+                <p className="card-subtext mt-3" style={{ fontSize: "12px" }}>
+                  {event.description}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
