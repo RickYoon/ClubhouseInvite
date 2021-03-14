@@ -3,6 +3,7 @@ import moment from "moment";
 import axios from "axios";
 import "./add.css";
 import "moment/locale/ko";
+import { Helmet } from "react-helmet";
 
 const Add = () => {
   const [showcard, setShowcard] = useState(false);
@@ -123,6 +124,11 @@ const Add = () => {
 
   return (
     <div className="container mt-3">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>My Title</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <br></br>
       <br></br>
       <div className="max-w-lg mx-auto">

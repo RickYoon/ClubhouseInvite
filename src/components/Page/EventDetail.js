@@ -11,6 +11,7 @@ import {
   LivejournalIcon,
 } from "react-share";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -81,6 +82,22 @@ const EventDetail = () => {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>페이지에 오신걸 환영해요</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="쇼피랩스 shopeelabs - 쇼피셀러 필수 솔루션"
+        />
+        <meta
+          property="og:description"
+          content="쇼피셀러를 위한 모든 툴과 정보를 제공하기 위해서 연구하는 쇼피랩스입니다.쇼피제품판매를 위해 소요되는 시간을 절약하고, 더 잘팔릴 물건을 올릴 수 있도록 돕도록 하겠습니다."
+        />
+        <meta property="og:site_name" content="쇼피랩스 shopeelabs" />
+      </Helmet>
+
       <div className="container">
         <div onClick={gotoclub} style={{ cursor: "pointer" }}>
           <div className="templetebox">
