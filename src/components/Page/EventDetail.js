@@ -140,7 +140,7 @@ const EventDetail = () => {
               <FacebookShareButton
                 size={64}
                 round={true}
-                url={`https://ios.joinclubhouse.com/event/M8NOG6q7`}
+                url={`http://localhost:3000/event/xe2AOvd3`}
               >
                 <FacebookIcon size={38} round />
               </FacebookShareButton>
@@ -150,7 +150,7 @@ const EventDetail = () => {
               <LinkedinShareButton
                 size={64}
                 round={true}
-                url={`https://ios.joinclubhouse.com/event/M8NOG6q7`}
+                url={`http://localhost:3000/event/xe2AOvd3`}
               >
                 <LinkedinIcon size={38} round />
               </LinkedinShareButton>
