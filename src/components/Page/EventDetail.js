@@ -10,6 +10,8 @@ import {
   LinkedinIcon,
   LivejournalIcon,
 } from "react-share";
+import { Link } from "react-router-dom";
+
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const EventDetail = () => {
@@ -73,51 +75,57 @@ const EventDetail = () => {
     });
   };
 
-  return (
-    <div className="container">
-      <div className="templetebox">
-        <div
-          className="w-full mt-3 rounded-md"
-          onClick={() => {
-            console.log(events.eventCode);
-          }}
-        >
-          <div className="card-body">
-            <p className="card-subtext" style={{ fontSize: "12px" }}>
-              {events.datetimeKorea}
-            </p>
-            <h5 className="card-title" style={{ fontSize: "15px" }}>
-              {events.title}
-            </h5>
-            {events.images.map((kk, index) => (
-              <div className="avatarbox">
-                <div className="innerbox">
-                  <img
-                    src={kk}
-                    alt="Avatar"
-                    width="40px"
-                    style={{ borderRadius: "50%", marginLeft: "5px" }}
-                  ></img>
-                  <div style={{ fontSize: "10px" }}>
-                    {events.moderators[index]}
-                  </div>
-                </div>
-              </div>
-            ))}
+  const gotoclub = () => {
+    window.location.href = "https://ios.joinclubhouse.com/event/M8NOG6q7";
+  };
 
-            <p className="card-subtext mt-3" style={{ fontSize: "12px" }}>
-              {events.description}
-            </p>
+  return (
+    <>
+      <div className="container">
+        <div onClick={gotoclub} style={{ cursor: "pointer" }}>
+          <div className="templetebox">
+            <div
+              className="w-full mt-3 rounded-md"
+              onClick={() => {
+                console.log(events.eventCode);
+              }}
+            >
+              <div className="card-body">
+                <p className="card-subtext" style={{ fontSize: "12px" }}>
+                  {events.datetimeKorea}
+                </p>
+                <h5 className="card-title" style={{ fontSize: "15px" }}>
+                  {events.title}
+                </h5>
+                {events.images.map((kk, index) => (
+                  <div className="avatarbox">
+                    <div className="innerbox">
+                      <img
+                        src={kk}
+                        alt="Avatar"
+                        width="40px"
+                        style={{ borderRadius: "50%", marginLeft: "5px" }}
+                      ></img>
+                      <div style={{ fontSize: "10px" }}>
+                        {events.moderators[index]}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                <p className="card-subtext mt-3" style={{ fontSize: "12px" }}>
+                  {events.description}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="container">
-        <div style={{ textAlign: "center" }}>Share event</div>
+        <div className="container">
+          <div style={{ textAlign: "center" }}>Share event</div>
 
-        <div className="sharebox">
-          <div className="col50">
-            <div className="innerbox">
+          <div className="sharebox">
+            <div className="col50">
               <CopyToClipboard
                 text={url}
                 onCopy={() => alert("복사되었습니다!")}
@@ -128,9 +136,7 @@ const EventDetail = () => {
               </CopyToClipboard>
               <div style={{ fontSize: "10px" }}>url복사</div>
             </div>
-          </div>
-          <div className="col50">
-            <div className="innerbox">
+            <div className="col50">
               <FacebookShareButton
                 size={64}
                 round={true}
@@ -140,9 +146,7 @@ const EventDetail = () => {
               </FacebookShareButton>
               <div style={{ fontSize: "10px" }}>facebook</div>
             </div>
-          </div>
-          <div className="col50">
-            <div className="innerbox">
+            <div className="col50">
               <LinkedinShareButton
                 size={64}
                 round={true}
@@ -155,7 +159,7 @@ const EventDetail = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
