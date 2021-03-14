@@ -83,19 +83,18 @@ const EventDetail = () => {
   return (
     <>
       <Helmet>
-        <meta charSet="utf-8" />
-        <title>페이지에 오신걸 환영해요</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="쇼피랩스 shopeelabs - 쇼피셀러 필수 솔루션"
-        />
-        <meta
-          property="og:description"
-          content="쇼피셀러를 위한 모든 툴과 정보를 제공하기 위해서 연구하는 쇼피랩스입니다.쇼피제품판매를 위해 소요되는 시간을 절약하고, 더 잘팔릴 물건을 올릴 수 있도록 돕도록 하겠습니다."
-        />
-        <meta property="og:site_name" content="쇼피랩스 shopeelabs" />
+        <meta name="description" content="description" />
+        <meta name="keywords" content="keywords" />
+        <title>"title"</title>
+        <meta property="og:title" content="og:title" />
+        <meta property="og:image" content="og:image" />
+        <meta property="og:site_name" content="og:site_name" />
+        <meta property="og:description" content="og:description" />
+
+        <meta name="twitter:title" content="twitter:title" />
+        <meta name="twitter:description" content="twitter:description" />
+        <meta name="twitter:image" content="twitter:image" />
+        <meta name="twitter:card" content="twitter:card" />
       </Helmet>
 
       <div className="container">
