@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./add.css";
 
+import { FacebookShareButton } from "react-share";
+
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [searchtrigger, setSearchtrigger] = useState(false);
@@ -103,7 +105,7 @@ const Home = () => {
 
   const onReset = () => {
     // setText("");
-    loadUserstwo();
+    loadUsers();
     if (searchtrigger === true) {
       setSearchtrigger(false);
     } else {
@@ -175,6 +177,7 @@ const Home = () => {
             justifyContent: "center",
             backgroundColor: "white",
             textAlign: "center",
+            borderRadius: "100px",
           }}
         >
           <div
@@ -236,16 +239,19 @@ const Home = () => {
       {events.map((event) => (
         <Link
           to={`/event/${event.eventCode}`}
-          style={{ textDecoration: "none", color: "black" }}
+          style={{
+            textDecoration: "none",
+            color: "black",
+          }}
         >
           <div
-            className="w-full mt-3 rounded-md"
+            className="w-full mt-3 rounded-md shadow-lg "
             onClick={() => {
               console.log(event.eventCode);
             }}
           >
-            <div className="card">
-              <div className="card-body">
+            <div className="card rounded-md">
+              <div className="card-body rounded-md">
                 <p className="card-subtext" style={{ fontSize: "12px" }}>
                   {event.datetimeKorea}
                 </p>

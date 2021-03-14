@@ -3,6 +3,12 @@ import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import "./add.css";
 import "moment/locale/ko";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+} from "react-share";
 
 const EventDetail = () => {
   const [events, setEvents] = useState({
@@ -65,7 +71,7 @@ const EventDetail = () => {
   };
 
   return (
-    <>
+    <div className="container">
       <div className="templetebox">
         <div
           className="w-full mt-3 rounded-md"
@@ -102,7 +108,23 @@ const EventDetail = () => {
           </div>
         </div>
       </div>
-    </>
+      <div style={{ backgroundColor: "black" }}>
+        <FacebookShareButton
+          size={64}
+          round={true}
+          url={`https://ios.joinclubhouse.com/event/M8NOG6q7`}
+        >
+          <FacebookIcon size={38} round />
+        </FacebookShareButton>
+        <LinkedinShareButton
+          size={64}
+          round={true}
+          url={`https://ios.joinclubhouse.com/event/M8NOG6q7`}
+        >
+          <LinkedinIcon size={38} round />
+        </LinkedinShareButton>
+      </div>
+    </div>
   );
 };
 
