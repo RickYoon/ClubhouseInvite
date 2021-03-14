@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./add.css";
 
-import { FacebookShareButton } from "react-share";
-
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [searchtrigger, setSearchtrigger] = useState(false);
