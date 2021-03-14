@@ -25,7 +25,28 @@
   margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
 
   margin-top: 96px;
-  margin-bottom: 32px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
+}
+
+.sharebox {
+  max-width: 550px;
+
+  position: relative; /* 추후 박스 하단에 추가 버튼을 위치시키기 위한 설정 */
+
+  margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.col50 {
+  width: 33.3%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }

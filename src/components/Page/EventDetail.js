@@ -8,9 +8,12 @@ import {
   FacebookIcon,
   LinkedinShareButton,
   LinkedinIcon,
+  LivejournalIcon,
 } from "react-share";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const EventDetail = () => {
+  const url = window.location.href;
   const [events, setEvents] = useState({
     title: "",
     weekday: "",
@@ -108,21 +111,49 @@ const EventDetail = () => {
           </div>
         </div>
       </div>
-      <div style={{ backgroundColor: "black" }}>
-        <FacebookShareButton
-          size={64}
-          round={true}
-          url={`https://ios.joinclubhouse.com/event/M8NOG6q7`}
-        >
-          <FacebookIcon size={38} round />
-        </FacebookShareButton>
-        <LinkedinShareButton
-          size={64}
-          round={true}
-          url={`https://ios.joinclubhouse.com/event/M8NOG6q7`}
-        >
-          <LinkedinIcon size={38} round />
-        </LinkedinShareButton>
+
+      <div className="container">
+        <div style={{ textAlign: "center" }}>Share event</div>
+
+        <div className="sharebox">
+          <div className="col50">
+            <div className="innerbox">
+              <CopyToClipboard
+                text={url}
+                onCopy={() => alert("복사되었습니다!")}
+              >
+                <button>
+                  <LivejournalIcon size={38} round />
+                </button>
+              </CopyToClipboard>
+              <div style={{ fontSize: "10px" }}>url복사</div>
+            </div>
+          </div>
+          <div className="col50">
+            <div className="innerbox">
+              <FacebookShareButton
+                size={64}
+                round={true}
+                url={`https://ios.joinclubhouse.com/event/M8NOG6q7`}
+              >
+                <FacebookIcon size={38} round />
+              </FacebookShareButton>
+              <div style={{ fontSize: "10px" }}>facebook</div>
+            </div>
+          </div>
+          <div className="col50">
+            <div className="innerbox">
+              <LinkedinShareButton
+                size={64}
+                round={true}
+                url={`https://ios.joinclubhouse.com/event/M8NOG6q7`}
+              >
+                <LinkedinIcon size={38} round />
+              </LinkedinShareButton>
+              <div style={{ fontSize: "10px" }}>Linkedin</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
