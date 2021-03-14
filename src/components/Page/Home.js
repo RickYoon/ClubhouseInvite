@@ -6,6 +6,8 @@ import "./add.css";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
+  const [searchtrigger, setSearchtrigger] = useState(false);
+  const [keyword, setKeyword] = useState("");
   const [searchtype, setSearchtype] = useState("today");
   const [infos, setInfos] = useState({
     title: "",
@@ -33,7 +35,7 @@ const Home = () => {
 
   useEffect(() => {
     loadUsers();
-  }, []);
+  }, [searchtype]);
 
   const loadUsers = async () => {
     const result = await axios({
@@ -41,7 +43,7 @@ const Home = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/queryEvents?searchtype=${searchtype}`,
+      url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/queryEvents?searchtype=${searchtype}&keyword=${keyword}`,
       // url: `https://z5v2zc0s9i.execute-api.ap-northeast-2.amazonaws.com/production/getLifeInfo`,
     }).then((res) => {
       // console.log(res.data.Items);
@@ -53,7 +55,7 @@ const Home = () => {
       // res.data.Items.sort(function (a, b) {
       //   return b.sortingField - a.sortingField;
       // });
-      console.log(res.data.Items[2].eventDate);
+      // console.log(res.data.Items[2].eventDate);
 
       res.data.Items.sort(function (a, b) {
         if (a.eventDate < b.eventDate) {
@@ -64,10 +66,11 @@ const Home = () => {
           return 0;
         }
       });
-      console.log(res.data.Items[2].eventDate);
 
-      // );
-      console.log(res.data.Items);
+      // console.log(res.data.Items[2].eventDate);
+
+      // // );
+      // console.log(res.data.Items);
 
       setEvents(res.data.Items);
       // console.log(events);
@@ -79,14 +82,86 @@ const Home = () => {
     console.log("you clicked!");
   };
 
+  const searchbutton = (e) => {
+    // window.location.href = "/add";
+    console.log(e);
+  };
+  function searchstart(event) {
+    // console.log(event);
+    event.preventDefault();
+    // console.log("form go");
+  }
+
+  const onChange = (e) => {
+    setKeyword(e.target.value);
+    console.log(keyword);
+  };
+
+  const onReset = () => {
+    // setText("");
+    loadUserstwo();
+    if (searchtrigger === true) {
+      setSearchtrigger(false);
+    } else {
+      setSearchtrigger(true);
+    }
+    console.log("click button");
+  };
+
+  const loadUserstwo = async () => {
+    const result = await axios({
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/queryEvents?searchtype=${searchtype}&keyword=${keyword}`,
+      // url: `https://z5v2zc0s9i.execute-api.ap-northeast-2.amazonaws.com/production/getLifeInfo`,
+    }).then((res) => {
+      // console.log(res.data.Items);
+      // setEvents(res.data.Items);
+      // console.log(events);
+      var sortingField = "eventDate";
+      console.log(res.data.Items);
+      // console.log(
+      // res.data.Items.sort(function (a, b) {
+      //   return b.sortingField - a.sortingField;
+      // });
+      // console.log(res.data.Items[2].eventDate);
+
+      // console.log(res.data.Items[2].eventDate);
+
+      // // );
+      // console.log(res.data.Items);
+
+      setEvents(res.data.Items);
+      // console.log(events);
+    });
+  };
+
   return (
     <div className="container mx-auto desktop mb-2 md:mb-10">
-      <Filter />
-      {/* {users.map((user) => (
-          <List props={user} 
-          />
-        ))} */}
-
+      <div className="w-full md:w-5/6 mx-auto bg-white p-4 rounded-md shadow-lg mt-5">
+        <form onSubmit={searchstart}>
+          <p className="text-left text-xl ff font-semibold mb-1">
+            재미있는 이벤트 찾기
+          </p>{" "}
+          <div className="w-full">
+            <input
+              onChange={onChange}
+              value={keyword}
+              style={{ fontSize: "12px" }}
+              className="bg-purple-white bg-gray-200 shadow rounded border-0 p-3 w-75 mt-2"
+              placeholder="검색어를 입력하고 검색을 누르세요"
+            />
+            <button
+              className="bg-gray-500 rounded border-0 w-25 p-3"
+              onClick={onReset}
+            >
+              검색
+            </button>
+          </div>
+        </form>
+      </div>{" "}
       {searchtype == "today" ? (
         <div
           className="w-full mt-3 rounded-md"
@@ -154,7 +229,6 @@ const Home = () => {
           </div>
         </div>
       )}
-
       {events.map((event) => (
         <Link
           to={`/event/${event.eventCode}`}
