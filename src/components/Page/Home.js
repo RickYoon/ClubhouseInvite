@@ -8,7 +8,7 @@ const Home = () => {
   const [events, setEvents] = useState([]);
   const [searchtrigger, setSearchtrigger] = useState(false);
   const [keyword, setKeyword] = useState("");
-  const [searchtype, setSearchtype] = useState("today");
+  const [searchtype, setSearchtype] = useState("fromtoday");
   const [infos, setInfos] = useState({
     title: "",
     weekday: "",
@@ -57,15 +57,19 @@ const Home = () => {
       // });
       // console.log(res.data.Items[2].eventDate);
 
-      res.data.Items.sort(function (a, b) {
-        if (a.eventDate < b.eventDate) {
-          return -1;
-        } else if (a.eventDate > b.eventDate) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+      if (searchtype === "fromtoday") {
+        res.data.Items.sort(function (a, b) {
+          if (a.eventDate < b.eventDate) {
+            return -1;
+          } else if (a.eventDate > b.eventDate) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+      } else {
+        console.log("newupdates");
+      }
 
       // console.log(res.data.Items[2].eventDate);
 
@@ -143,7 +147,7 @@ const Home = () => {
       <div className="w-full md:w-5/6 mx-auto bg-white p-4 rounded-md shadow-lg mt-5">
         <form onSubmit={searchstart}>
           <p className="text-left text-xl ff font-semibold mb-1">
-            재미있는 이벤트 찾기
+            관심있는 이벤트 찾기
           </p>{" "}
           <div className="w-full">
             <input
@@ -162,7 +166,7 @@ const Home = () => {
           </div>
         </form>
       </div>{" "}
-      {searchtype == "today" ? (
+      {searchtype === "fromtoday" ? (
         <div
           className="w-full mt-3 rounded-md"
           style={{
@@ -177,21 +181,21 @@ const Home = () => {
             className="card-body w-50"
             style={{ backgroundColor: "white" }}
             onClick={() => {
-              console.log("today event");
-              setSearchtype("today");
+              console.log("fromtoday");
+              setSearchtype("fromtoday");
             }}
           >
-            오늘의 이벤트
+            from today
           </div>
           <div
             className="card-body w-50"
             style={{ backgroundColor: "gray" }}
             onClick={() => {
-              console.log("every event");
-              setSearchtype("everyday");
+              console.log("newupdates");
+              setSearchtype("newupdates");
             }}
           >
-            전체 이벤트
+            new updates
           </div>
         </div>
       ) : (
@@ -209,23 +213,23 @@ const Home = () => {
             className="card-body w-50"
             style={{ backgroundColor: "gray" }}
             onClick={() => {
-              console.log("today event");
-              setSearchtype("today");
+              console.log("fromtoday");
+              setSearchtype("fromtoday");
               // loadUsers(searchtype);
             }}
           >
-            오늘의 이벤트
+            from today
           </div>
           <div
             className="card-body w-50"
             style={{ backgroundColor: "white" }}
             onClick={() => {
-              console.log("every event");
-              setSearchtype("everyday");
+              console.log("newupdates");
+              setSearchtype("newupdates");
               // loadUsers(searchtype);
             }}
           >
-            전체 이벤트
+            new updates
           </div>
         </div>
       )}
@@ -276,20 +280,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// const loadItems = async () => {
-//   setIsLoading(true);
-//   await axios({
-//     method: "get",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     url: `https://nxqs16xalf.execute-api.ap-northeast-2.amazonaws.com/default/sgMarket?cat=${props.catselection}`,
-//   }).then((res) => {
-//     setIsLoading(false);
-//     var sortingField = "revenue";
-//     const newRanking = res.data.sort(function (a, b) {
-//       // 오름차순
-//       return b[sortingField] - a[sortingField];
-//       // 13, 21, 25, 44
-//     });

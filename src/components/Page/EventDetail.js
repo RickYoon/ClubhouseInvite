@@ -29,7 +29,7 @@ const EventDetail = () => {
   // } = events; // 비구조화 할당을 통해 값 추출
 
   let history = useHistory();
-  // const { id } = useParams();
+  const { id } = useParams();
   // const back = () => {
   //   history.push("/");
   // };
@@ -44,7 +44,7 @@ const EventDetail = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/queryDetailEvent`,
+      url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/queryDetailEvent?eventID=${id}`,
     }).then((res) => {
       // console.log(res.data[0]);
       setEvents({

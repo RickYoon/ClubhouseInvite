@@ -6,6 +6,7 @@ import TopNavBarDetail from "./components/Navbar/TopNavBarDetail";
 // import List from "./components/Moleclue/List";
 import Home from "./components/Page/Home";
 import Add from "./components/Page/Add";
+import footer from "./components/Moleclue/footer";
 import EventDetail from "./components/Page/EventDetail";
 // import Card from "./components/Atom/Card";
 import { Route, Switch } from "react-router-dom";
@@ -24,6 +25,9 @@ function App() {
         <Route exact path="/add" component={Add} />
         <Route exact path="/event/:id" component={EventDetail} />
         {/* <Route exact path="/card" component={Card} /> */}
+      </Switch>
+      <Switch>
+        <Route path="/" component={footer} />
       </Switch>
     </div>
   );

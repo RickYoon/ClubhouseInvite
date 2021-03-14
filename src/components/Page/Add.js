@@ -18,6 +18,7 @@ const Add = () => {
     datetimeDB: "",
     club: "",
     url: "",
+    timezone: "",
   });
 
   // const {
@@ -86,6 +87,7 @@ const Add = () => {
           alert("올바른 주소가 아닙니다.");
         } else {
           setShowcard(true);
+          console.log(res);
           let date = new Date(res.data.datetime);
           // moment().subtract(7, 'days');
           console.log(moment(date).subtract(9, "hours").day());

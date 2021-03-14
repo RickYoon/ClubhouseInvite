@@ -46,3 +46,14 @@
 :before {
   border: 0 solid #e2e8f0;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  height: 30px;
+  text-align: center;
+}
