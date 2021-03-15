@@ -3,9 +3,11 @@ import moment from "moment";
 import axios from "axios";
 import "./add.css";
 import "moment/locale/ko";
-import { Helmet } from "react-helmet";
+import ReactLoading from "react-loading";
 
 const Add = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const [showcard, setShowcard] = useState(false);
 
   const [infos, setInfos] = useState({
@@ -53,6 +55,7 @@ const Add = () => {
 
   const postEvents = async () => {
     console.log("you clicked post!");
+
     await axios({
       method: "post",
       headers: {
@@ -62,6 +65,7 @@ const Add = () => {
       data: { eventdata: infos },
     }).then((res) => {
       console.log(res.data);
+
       if (res.data.dbinsertResult === "success") {
         alert("성공");
         window.location.href = "/";
@@ -74,6 +78,8 @@ const Add = () => {
   const loadUsers = async () => {
     // const url = "https://www.joinclubhouse.com/event/xkL60q1y";
     try {
+      setIsLoading(true);
+
       await axios({
         method: "GET",
         headers: {
@@ -87,6 +93,8 @@ const Add = () => {
         if (res.data.title.length === 0) {
           alert("올바른 주소가 아닙니다.");
         } else {
+          setIsLoading(false);
+
           setShowcard(true);
           console.log(res);
           let date = new Date(res.data.datetime);
@@ -124,11 +132,6 @@ const Add = () => {
 
   return (
     <div className="container mt-3">
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>My Title</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-      </Helmet>
       <br></br>
       <br></br>
       <div className="max-w-lg mx-auto">
@@ -158,6 +161,16 @@ const Add = () => {
             </button>
           </form>
         </div>
+        {isLoading ? (
+          <ReactLoading
+            type="cubes"
+            color="black"
+            style={{ textAlign: "center", width: "150px", margin: "auto" }}
+          />
+        ) : (
+          <div></div>
+        )}
+
         {showcard === true ? (
           <div className="container mt-4">
             <div className="card">

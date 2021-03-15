@@ -3,8 +3,11 @@ import Filter from "../Atom/Filter";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./add.css";
+import ReactLoading from "react-loading";
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const [events, setEvents] = useState([]);
   const [searchtrigger, setSearchtrigger] = useState(false);
   const [keyword, setKeyword] = useState("");
@@ -38,6 +41,8 @@ const Home = () => {
   }, [searchtype]);
 
   const loadUsers = async () => {
+    setIsLoading(true);
+
     const result = await axios({
       method: "GET",
       headers: {
@@ -46,6 +51,7 @@ const Home = () => {
       url: `https://ddjw33n2b0.execute-api.ap-northeast-2.amazonaws.com/production/queryEvents?searchtype=${searchtype}&keyword=${keyword}`,
       // url: `https://z5v2zc0s9i.execute-api.ap-northeast-2.amazonaws.com/production/getLifeInfo`,
     }).then((res) => {
+      setIsLoading(false);
       // console.log(res.data.Items);
       // setEvents(res.data.Items);
       // console.log(events);
@@ -233,6 +239,15 @@ const Home = () => {
             new updates
           </div>
         </div>
+      )}
+      {isLoading ? (
+        <ReactLoading
+          type="cubes"
+          color="black"
+          style={{ textAlign: "center", width: "150px", margin: "auto" }}
+        />
+      ) : (
+        <div></div>
       )}
       {events.map((event) => (
         <Link

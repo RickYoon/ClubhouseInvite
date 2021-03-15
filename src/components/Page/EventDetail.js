@@ -85,7 +85,7 @@ const EventDetail = () => {
       <Helmet>
         <meta name="description" content="description" />
         <meta name="keywords" content="keywords" />
-        <title>"title"</title>
+        <title>"헬멧 타이틀"</title>
         <meta property="og:title" content="og:title" />
         <meta property="og:image" content="og:image" />
         <meta property="og:site_name" content="og:site_name" />
